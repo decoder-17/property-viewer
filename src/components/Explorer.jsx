@@ -14,7 +14,7 @@ export default function Explorer() {
   }
   return (
     <div className=" bg-white mt-20 w-full p-4 rounded-3xl items-center">
-      <div className="flexflex-col">
+      <div className="flex flex-row justify-around">
         <div className="flex-1">
           {Object.keys(data).map((item, index) => {
             return (
@@ -26,22 +26,30 @@ export default function Explorer() {
                   type="checkbox"
                   id="cb1"
                   value="cb1"
-                  className="
-            appearance-none h-6 w-6 p-4 mx-4 bg-gray-400 rounded-full 
+                  className="            appearance-none h-6 w-6 p-4 mx-4 bg-gray-400 rounded-full 
             checked:bg-blue-600 checked:scale-75
-            transition-all duration-200 peer
-        "
+            transition-all duration-200 peer"
                 />
                 <div className="font-medium leading-none mx-4 text-black-100 items-center">
                   {item}
                 </div>
 
                 <button
-                  className="text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  className={
+                    viewDetails
+                      ? showDetails === item
+                        ? "text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        : "text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      : "text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  }
                   type="button"
                   onClick={() => updateView(item)}
                 >
-                  View
+                  {viewDetails
+                    ? showDetails === item
+                      ? "Hide"
+                      : "View"
+                    : "View"}
                 </button>
               </div>
             );
