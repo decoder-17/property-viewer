@@ -4,19 +4,29 @@ import Details from "./Details";
 
 export default function Explorer() {
   const data = useContext(GlobalContext);
-  // console.log(data);
-  const { filesList, setFilesList } = useState(data);
+  const itemsToRemove = [];
+  const [itemsList, setItemsList] = useState(data);
+  console.log(itemsList);
   const [viewDetails, setViewDetails] = useState(false);
   const [showDetails, setShowDetails] = useState();
   function updateView(item) {
     setViewDetails((prev) => !prev);
     setShowDetails(item);
   }
+
+  function removeItem() {
+    for (let i = 0; i < itemsToRemove.length; i++) {
+      delete itemsList[itemsToRemove[i]];
+    }
+    setItemsList(itemsList);
+    console.log(itemsList);
+  }
+
   return (
     <div className=" bg-white mt-20 w-full p-4 rounded-3xl items-center">
       <div className="flex flex-row justify-around">
         <div className="flex-1">
-          {Object.keys(data).map((item, index) => {
+          {Object.keys(itemsList).map((item, index) => {
             return (
               <div
                 key={index}
@@ -26,7 +36,12 @@ export default function Explorer() {
                   type="checkbox"
                   id="cb1"
                   value="cb1"
-                  className="            appearance-none h-6 w-6 p-4 mx-4 bg-gray-400 rounded-full 
+                  onChange={() => {
+                    if (itemsToRemove.includes(item))
+                      itemsToRemove.splice(itemsToRemove.indexOf(item), 1);
+                    else itemsToRemove.push(item);
+                  }}
+                  className="appearance-none h-6 w-6 p-4 mx-4 bg-gray-400 rounded-full 
             checked:bg-blue-600 checked:scale-75
             transition-all duration-200 peer"
                 />
@@ -63,7 +78,15 @@ export default function Explorer() {
           target="_blank"
           className="group font-medium tracking-wide select-none text-base relative inline-flex items-center justify-center cursor-pointer h-12 border-2 border-solid py-0 px-6 rounded-md overflow-hidden z-10 transition-all duration-300 ease-in-out outline-0 bg-blue-500 text-white border-blue-500 hover:text-blue-500 focus:text-blue-500"
         >
-          <strong className="font-medium">Submit</strong>
+          <strong
+            className="font-medium"
+            onClick={() => {
+              removeItem();
+              window.alert(`${itemsToRemove} has been removed.`);
+            }}
+          >
+            Submit
+          </strong>
           <span className="absolute bg-white bottom-0 w-0 left-1/2 h-full -translate-x-1/2 transition-all ease-in-out duration-300 group-hover:w-[105%] -z-[1] group-focus:w-[105%]"></span>
         </a>
       </div>
