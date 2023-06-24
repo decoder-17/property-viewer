@@ -9,17 +9,13 @@ export default function Explorer() {
   console.log(itemsList);
   const [viewDetails, setViewDetails] = useState(false);
   const [showDetails, setShowDetails] = useState();
-  function updateView(item) {
-    setViewDetails((prev) => !prev);
-    setShowDetails(item);
-  }
 
   function removeItem() {
     for (let i = 0; i < itemsToRemove.length; i++) {
       delete itemsList[itemsToRemove[i]];
     }
-    setItemsList(itemsList);
-    console.log(itemsList);
+    setItemsList({ ...itemsList });
+    itemsToRemove.pop();
   }
 
   return (
@@ -58,7 +54,10 @@ export default function Explorer() {
                       : "text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   }
                   type="button"
-                  onClick={() => updateView(item)}
+                  onClick={() => {
+                    setViewDetails((prev) => !prev);
+                    setShowDetails(item);
+                  }}
                 >
                   {viewDetails
                     ? showDetails === item
@@ -82,7 +81,7 @@ export default function Explorer() {
             className="font-medium"
             onClick={() => {
               removeItem();
-              window.alert(`${itemsToRemove} has been removed.`);
+              window.alert(`Item/s has been removed.`);
             }}
           >
             Submit
