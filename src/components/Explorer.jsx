@@ -6,7 +6,6 @@ export default function Explorer() {
   const data = useContext(GlobalContext);
   const itemsToRemove = [];
   const [itemsList, setItemsList] = useState(data);
-  console.log(itemsList);
   const [viewDetails, setViewDetails] = useState(false);
   const [showDetails, setShowDetails] = useState();
 
@@ -19,7 +18,7 @@ export default function Explorer() {
   }
 
   return (
-    <div className=" bg-white mt-20 w-full p-4 rounded-3xl items-center">
+    <div className=" bg-white mt-8 w-full p-4 rounded-3xl items-center">
       <div className="flex flex-row justify-around">
         <div className="flex-1">
           {Object.keys(itemsList).map((item, index) => {
@@ -30,8 +29,8 @@ export default function Explorer() {
               >
                 <input
                   type="checkbox"
-                  id="cb1"
-                  value="cb1"
+                  id={item}
+                  value=""
                   onChange={() => {
                     if (itemsToRemove.includes(item))
                       itemsToRemove.splice(itemsToRemove.indexOf(item), 1);
@@ -72,20 +71,18 @@ export default function Explorer() {
         <div>{viewDetails && <Details item={showDetails} />}</div>
       </div>
 
-      <div className="max-w-md mx-auto space-y-6 m-6 flex justify-center">
+      <div
+        className="max-w-md mx-auto space-y-6 m-6 flex justify-center"
+        onClick={() => {
+          removeItem();
+          window.alert(`Item/s has been removed.`);
+        }}
+      >
         <a
           target="_blank"
           className="group font-medium tracking-wide select-none text-base relative inline-flex items-center justify-center cursor-pointer h-12 border-2 border-solid py-0 px-6 rounded-md overflow-hidden z-10 transition-all duration-300 ease-in-out outline-0 bg-blue-500 text-white border-blue-500 hover:text-blue-500 focus:text-blue-500"
         >
-          <strong
-            className="font-medium"
-            onClick={() => {
-              removeItem();
-              window.alert(`Item/s has been removed.`);
-            }}
-          >
-            Submit
-          </strong>
+          <strong className="font-medium">Submit</strong>
           <span className="absolute bg-white bottom-0 w-0 left-1/2 h-full -translate-x-1/2 transition-all ease-in-out duration-300 group-hover:w-[105%] -z-[1] group-focus:w-[105%]"></span>
         </a>
       </div>
