@@ -1,13 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../App";
 import Details from "./Details";
 
 export default function Explorer() {
   const data = useContext(GlobalContext);
-  const itemsToRemove = [];
   const [itemsList, setItemsList] = useState(data);
   const [viewDetails, setViewDetails] = useState(false);
   const [showDetails, setShowDetails] = useState();
+  const [checkedItems, setCheckedItems] = useState({});
+  const [itemsToRemove, setItemsToRemove] = useState([]);
 
   function removeItem() {
     for (let i = 0; i < itemsToRemove.length; i++) {
@@ -15,6 +16,25 @@ export default function Explorer() {
     }
     setItemsList({ ...itemsList });
     itemsToRemove.pop();
+  }
+
+  useEffect(() => {
+    setItemsList(data);
+  }, [data]);
+
+  function handleCheckboxChange(item) {
+    setCheckedItems((prevCheckedItems) => ({
+      ...prevCheckedItems,
+      [item]: !prevCheckedItems[item],
+    }));
+
+    setItemsToRemove((prevItemsToRemove) => {
+      if (prevItemsToRemove.includes(item)) {
+        return prevItemsToRemove.filter((value) => value !== item);
+      } else {
+        return [...prevItemsToRemove, item];
+      }
+    });
   }
 
   return (
@@ -31,11 +51,8 @@ export default function Explorer() {
                   type="checkbox"
                   id={item}
                   value=""
-                  onChange={() => {
-                    if (itemsToRemove.includes(item))
-                      itemsToRemove.splice(itemsToRemove.indexOf(item), 1);
-                    else itemsToRemove.push(item);
-                  }}
+                  onChange={() => handleCheckboxChange(item)}
+                  checked={checkedItems[item]}
                   className="appearance-none h-6 w-6 p-4 mx-4 bg-gray-400 rounded-full 
             checked:bg-blue-600 checked:scale-75
             transition-all duration-200 peer"
@@ -75,7 +92,7 @@ export default function Explorer() {
         className="max-w-md mx-auto space-y-6 m-6 flex justify-center"
         onClick={() => {
           removeItem();
-          window.alert(`Item/s has been removed.`);
+          window.alert(`Item has been removed.`);
         }}
       >
         <a
