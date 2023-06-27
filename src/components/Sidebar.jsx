@@ -14,8 +14,8 @@ export default function Sidebar() {
 
   return (
     <div className="logos flex flex-col justify-between items-center bg-white rounded-3xl m-4 max-w-sm">
-      <div className="t2mlogo flex flex-col">
-        <img src={caeliust2m} alt="caeliust2m" className=" h-48" />
+      <div className="t2mlogo flex flex-col ">
+        <img src={caeliust2m} alt="caeliust2m" className=" h-48 rounded-full" />
         <h1 className="text-2xl font-semibold p-4">Property Viewer</h1>
       </div>
       <div className="header flex flex-col">

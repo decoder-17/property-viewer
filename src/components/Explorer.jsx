@@ -41,7 +41,7 @@ export default function Explorer() {
   }
 
   return (
-    <div className="flex flex-col bg-white m-4 w-full overflow-y-auto p-4 rounded-3xl">
+    <div className="flex flex-col bg-white m-4 w-full overflow-y-auto scroll-smooth p-4 rounded-3xl">
       <div className="flex flex-row justify-around">
         <div className="flex-1">
           {Object.keys(itemsList).map((item, index) => {
