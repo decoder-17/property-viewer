@@ -5,7 +5,7 @@ export default function Details(item) {
   const data = useContext(GlobalContext);
 
   return (
-    <div className=" mx-20 flex-col">
+    <div className=" mx-20 flex-col overflow-scroll-y h-full">
       <h3 className="m-4 font-semibold text-black-900 dark:text-black text-center">
         Contents
       </h3>

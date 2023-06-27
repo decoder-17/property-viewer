@@ -1,71 +1,186 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import Explorer from "./components/Explorer";
-import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
 import Instructions from "./components/Instructions";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import FileDrop from "./components/FileDrop";
 
 export const GlobalContext = React.createContext();
 
 function App() {
   const initialState = {
-    Error: {
-      Error: ["Code(string)", "Message(string)", "Details(string)"],
-      ExceptionRequest: [
-        "ExceptionCode(string)",
-        "Message(string)",
-        "TransactionData(string)",
-        "DumpAnalysis(string)",
-        "DataEncoding(string)",
-        "CorrelationID(string)",
-        "Custom(string)",
-        "Timeout(string)",
-        "ReplyDestination(string)",
-        "NotificationChannel(string)",
-        "RenderID(string)",
-      ],
-    },
-    LogLevel: ["ApplicationID(string)", "Level(string)"],
-    PDFRequest: [
-      "PolicyCode(string)",
-      "PolicyYear(string)",
-      "PolicySuffix(string)",
-      "GroupIDN(string)",
-      "UserType(string)",
-      "UserID(string)",
-    ],
-    Contacts: ["Contact(null)"],
-    policyKeyDetails: ["errorDetails(null)"],
-    errorDetails: ["errorDescription(string)", "errorCode(string)"],
-    Header: [
+    Procedures: ["Procedure(null)", "Procedure(null)"],
+    RenderConfigs: ["RenderConfig(null)", "RenderConfig(null)"],
+    Severity: [
+      "ID(string)",
       "ApplicationID(string)",
-      "ComponentName(string)",
-      "Hostname(string)",
-      "Timestamp(dateTime)",
-      "TransactionDomain(string)",
-      "TransactionType(string)",
-      "TransactionID(string)",
+      "Name(string)",
+      "Description(string)",
+      "ID(string)",
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
+      "ID(string)",
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
     ],
-    PolicyKey: [
-      "policyUnitNumber(string)",
-      "policySuffixCode(string)",
-      "groupIDN(string)",
-      "policyYearDate(string)",
+    Severities: ["Severity(null)", "Severity(null)"],
+    Types: ["Type(null)", "Type(null)"],
+    Category: [
+      "ID(string)",
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
+      "ID(string)",
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
+      "ID(string)",
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
     ],
-    RIRRequest: [
-      "PolicyKey(null)",
-      "UserInformation(null)",
-      "VersionNumber(string)",
+    Applications: ["Application(null)", "Application(null)"],
+    CLEMigration: [
+      "Applications(null)",
+      "Categories(null)",
+      "Types(null)",
+      "Severities(null)",
+      "Procedures(null)",
+      "ExceptionConfigs(null)",
+      "RenderConfigs(null)",
     ],
-    UserInformation: ["userID(string)", "userType(string)"],
-    errorDetails: ["errorDescription(string)", "errorCode(string)"],
-    STRPDFReqResp: ["errorDetails(null)"],
+    Categories: ["Category(null)", "Category(null)"],
+    ExceptionConfig: [
+      "ApplicationID(string)",
+      "ExceptionCode(string)",
+      " Description(string)",
+      "CategoryID(string)",
+      "TypeID(string)",
+      "SeverityID(string)",
+      "ProcedureID(string)",
+      "NotificationChnl(string)",
+      "Rolename(string)",
+      "ReplyDestination(string)",
+      "EmailTo(string)",
+      "EmailCC(string)",
+      "ExceptionTtl(string)",
+      "Instruction(string)",
+      "ResolveDelayInterval(string)",
+      "EventType(string)",
+      "ApplicationID(string)",
+      "ExceptionCode(string)",
+      "Description(string)",
+      "CategoryID(string)",
+      "TypeID(string)",
+      "SeverityID(string)",
+      "ProcedureID(string)",
+      "NotificationChnl(string)",
+      "Rolename(string)",
+      "ReplyDestination(string)",
+      "EmailTo(string)",
+      "EmailCC(string)",
+      "ExceptionTtl(string)",
+      "Instruction(string)",
+      "ResolveDelayInterval(string)",
+      "EventType(string)",
+      "ApplicationID(string)",
+      "ExceptionCode(string)",
+      "Description(string)",
+      "CategoryID(string)",
+      "TypeID(string)",
+      "SeverityID(string)",
+      "ProcedureID(string)",
+      "NotificationChnl(string)",
+      "Rolename(string)",
+      "ReplyDestination(string)",
+      "EmailTo(string)",
+      "EmailCC(string)",
+      "ExceptionTtl(string)",
+      "Instruction(string)",
+      "ResolveDelayInterval(string)",
+      "EventType(string)",
+    ],
+    Procedure: [
+      "ID(string)",
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
+      "Destination(string)",
+      "PhysicalName(string)",
+      "ID(string)",
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
+      "Destination(string)",
+      "PhysicalName(string)",
+      "ID(string)",
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
+      "Destination(string)",
+      "PhysicalName(string)",
+    ],
+    Application: [
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
+    ],
+    Type: [
+      "ID(string)",
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
+      "ID(string)",
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
+      "ID(string)",
+      "ApplicationID(string)",
+      "Name(string)",
+      "Description(string)",
+    ],
+    ExceptionConfigs: ["ExceptionConfig(null)", "ExceptionConfig(null)"],
+    RenderConfig: [
+      "ApplicationID(string)",
+      "RenderID(string)",
+      "XSLT(string)",
+      "CSS(string)",
+      "ApplicationID(string)",
+      "RenderID(string)",
+      "XSLT(string)",
+      "CSS(string)",
+      "ApplicationID(string)",
+      "RenderID(string)",
+      "XSLT(string)",
+      "CSS(string)",
+    ],
   };
-
+  // const [open, setOpen] = useState();
   return (
     <GlobalContext.Provider value={initialState}>
-      <Header />
-      <Instructions />
-      <Explorer />
+      <Router>
+        <div className="h-screen">
+          <div className="home flex flex-grow h-screen">
+            <Sidebar />
+            <div className="main flex flex-grow h-screen">
+              <Routes>
+                <Route path="/" element={<Explorer />} />
+                <Route path="/instructions" element={<Instructions />} />
+                <Route path="/explorer" element={<Explorer />} />
+              </Routes>
+            </div>
+          </div>
+        </div>
+      </Router>
     </GlobalContext.Provider>
   );
 }
