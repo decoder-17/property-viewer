@@ -11,7 +11,7 @@ export default function Explorer() {
   const [checkedItems, setCheckedItems] = useState({});
   const [itemsToRemove, setItemsToRemove] = useState([]);
 
-  console.log(data);
+  // console.log(data);
 
   function removeItem() {
     for (let i = 0; i < itemsToRemove.length; i++) {
@@ -41,7 +41,7 @@ export default function Explorer() {
   }
 
   return (
-    <div className="flex flex-col bg-white m-4 w-full h-full overflow-y-auto p-4 rounded-3xl">
+    <div className="flex flex-col bg-white m-4 w-full overflow-y-auto p-4 rounded-3xl">
       <div className="flex flex-row justify-around">
         <div className="flex-1">
           {Object.keys(itemsList).map((item, index) => {
