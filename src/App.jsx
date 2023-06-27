@@ -2,6 +2,7 @@ import "./App.css";
 import React from "react";
 import Explorer from "./components/Explorer";
 import Header from "./components/Header";
+import Instructions from "./components/Instructions";
 
 export const GlobalContext = React.createContext();
 
@@ -63,6 +64,7 @@ function App() {
   return (
     <GlobalContext.Provider value={initialState}>
       <Header />
+      <Instructions />
       <Explorer />
     </GlobalContext.Provider>
   );

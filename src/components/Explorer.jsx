@@ -91,8 +91,16 @@ export default function Explorer() {
       <div
         className="max-w-md mx-auto space-y-6 m-6 flex justify-center"
         onClick={() => {
-          removeItem();
-          window.alert(`Item has been removed.`);
+          if (
+            window.confirm(
+              `The selected items will be removed. Please click on "OK" to confirm.`
+            )
+          ) {
+            removeItem();
+            window.alert("The items have been removed.");
+          } else {
+            window.alert("The items have not been removed.");
+          }
         }}
       >
         <a
