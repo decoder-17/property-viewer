@@ -24,7 +24,7 @@ export default function FileDrop() {
   };
 
   return (
-    <div className="flex flex-grow flex-col justify-center align-middle bg-white m-4 p-4 rounded-3xl ">
+    <div className="flex flex-grow flex-col justify-center align-middle bg-white my-4 mx-8 p-4 rounded-3xl ">
       <main className="flex items-center justify-center align-middle font-sans">
         <label
           htmlFor="dropzone-file"

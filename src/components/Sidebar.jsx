@@ -13,9 +13,13 @@ export default function Sidebar() {
   const inactiveStyle = "text-lg font-semibold p-2 my-2 align-middle ";
 
   return (
-    <div className="logos flex flex-col justify-between items-center bg-white rounded-3xl my-10 ml-4 max-w-sm">
+    <div className="logos flex flex-col justify-between items-center bg-white rounded-3xl mx-4 w-full h-full">
       <div className="t2mlogo flex flex-col ">
-        <img src={caeliust2m} alt="caeliust2m" className=" h-48 rounded-full" />
+        <img
+          src={caeliust2m}
+          alt="caeliust2m"
+          className=" h-48 rounded-full w-auto"
+        />
         <h1 className="text-xl font-semibold p-4">Property Viewer</h1>
       </div>
       <div className="header flex flex-col">

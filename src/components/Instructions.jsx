@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Instructions() {
   return (
-    <div className="flex flex-col flex-grow h-full m-4 border-box ">
-      <div className="flex flex-col p-8 rounded-2xl w-full bg-white items-center ">
+    <div className="flex flex-col flex-grow h-full my-4 mx-8 border-box ">
+      <div className="flex flex-col p-8 rounded-3xl w-full bg-white items-center ">
         <h1 className="text-2xl font-semibold  p-2">About</h1>
         <p className="max-w-6xl text-justify">
           Introducing the Property Viewer, a versatile project that offers an

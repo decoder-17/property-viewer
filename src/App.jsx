@@ -170,13 +170,15 @@ function App() {
       <Router>
         <div className="h-screen">
           <div className="home flex flex-grow h-screen">
-            <Sidebar />
+            <div className="my-4 mx-2">
+              <Sidebar />
+            </div>
             <div className="main flex flex-grow h-screen w-screen">
               <Routes>
                 {/* <Route path="/" element={<Explorer />} /> */}
                 <Route path="/" element={<FileDrop />} />
                 <Route path="/instructions" element={<Instructions />} />
-                <Route path="/explorer" element={<Explorer />} />
+                {/* <Route path="/explorer" element={<Explorer />} /> */}
               </Routes>
             </div>
           </div>
