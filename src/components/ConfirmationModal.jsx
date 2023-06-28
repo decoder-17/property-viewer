@@ -1,7 +1,5 @@
 import { useContext } from "react";
-import { GlobalContext } from "../App";
 export default function ConfirmationModal() {
-  const [open, setOpen] = useContext(GlobalContext);
   return (
     <div class=" flex justify-center  items-center absolute top-50 right-0 left-0 bottom-0">
       <div class="bg-white px-16 py-14 rounded-md text-center">

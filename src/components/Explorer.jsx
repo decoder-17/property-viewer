@@ -1,11 +1,12 @@
 import { useContext, useState, useEffect } from "react";
-import { GlobalContext } from "../App";
 import Details from "./Details";
 import ConfirmationModal from "./ConfirmationModal";
+import { FilesListContext } from "../App";
 
 export default function Explorer() {
-  const data = useContext(GlobalContext);
-  const [itemsList, setItemsList] = useState(data);
+  const { itemsList, setItemsList } = useContext(FilesListContext);
+  // console.log(itemsList);
+  // const [itemsList, setItemsList] = useState(data);
   const [viewDetails, setViewDetails] = useState(false);
   const [showDetails, setShowDetails] = useState();
   const [checkedItems, setCheckedItems] = useState({});
@@ -17,13 +18,13 @@ export default function Explorer() {
     for (let i = 0; i < itemsToRemove.length; i++) {
       delete itemsList[itemsToRemove[i]];
     }
-    setItemsList({ ...itemsList });
+    setItemsList(...itemsList);
     itemsToRemove.pop();
   }
 
   useEffect(() => {
-    setItemsList(data);
-  }, [data]);
+    setItemsList({ itemsList });
+  }, {});
 
   function handleCheckboxChange(item) {
     setCheckedItems((prevCheckedItems) => ({
@@ -55,22 +56,22 @@ export default function Explorer() {
               >
                 <input
                   type="checkbox"
-                  id={item.toString()}
+                  id={item}
                   value=""
-                  onChange={() => handleCheckboxChange(item.toString())}
-                  checked={checkedItems[item.toString()]}
+                  onChange={() => handleCheckboxChange(item)}
+                  checked={checkedItems[item]}
                   className="appearance-none h-6 w-6 p-4 mx-4 bg-gray-400 rounded-full 
             checked:bg-blue-600 checked:scale-75
             transition-all duration-200 peer"
                 />
                 <div className="font-medium leading-none mx-4 text-black-100 items-center">
-                  {item.toString()}
+                  {item}
                 </div>
 
                 <button
                   className={
                     viewDetails
-                      ? showDetails === item.toString()
+                      ? showDetails === item
                         ? "text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         : "text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                       : "text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -78,11 +79,11 @@ export default function Explorer() {
                   type="button"
                   onClick={() => {
                     setViewDetails((prev) => !prev);
-                    setShowDetails(item.toString());
+                    setShowDetails(item);
                   }}
                 >
                   {viewDetails
-                    ? showDetails === item.toString()
+                    ? showDetails === item
                       ? "Hide"
                       : "View"
                     : "View"}

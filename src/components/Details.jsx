@@ -1,17 +1,16 @@
 import { useContext } from "react";
-import { GlobalContext } from "../App";
+import { FilesListContext } from "../App";
 
 export default function Details(item) {
-  const data = useContext(GlobalContext);
-
+  const { itemsList } = useContext(FilesListContext);
   return (
     <div className=" flex flex-col h-full pb-4 flex-grow overflow-y-auto scroll-smooth rounded-3xl bg-white mx-6 min-w-full items-center">
       <h3 className="m-4 font-semibold text-black-900 dark:text-black text-center">
         Contents
       </h3>
 
-      {data[item.item] &&
-        Object.values(data[item.item]).map((item, index) => {
+      {itemsList[item.item] &&
+        Object.values(itemsList[item.item]).map((item, index) => {
           return (
             <div
               key={index}

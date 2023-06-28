@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { FilesListContext } from "../App";
 
 export default function FileDrop() {
+  const { itemsList, setItemsList } = useContext(FilesListContext);
   const [files, setFiles] = useState([]);
+  const navigate = useNavigate();
   let filesToUpload = new FormData();
   const handleChange = (e) => {
     setFiles([...files, e.target.files[0]]);
@@ -10,15 +14,16 @@ export default function FileDrop() {
 
   const handleFileUpload = () => {
     filesToUpload.append("file", files[0]);
-    console.log(filesToUpload[0]);
     axios
       .post("http://172.16.5.159:8080/xsd/upload", filesToUpload)
       .then((response) => {
-        console.log(response);
+        if (response.status === 200) setItemsList(response.data.data);
+        console.log(itemsList);
       })
       .catch((error) => {
         console.log(error);
       });
+    navigate("/explorer");
   };
 
   return (
