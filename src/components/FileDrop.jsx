@@ -3,18 +3,16 @@ import axios from "axios";
 
 export default function FileDrop() {
   const [files, setFiles] = useState([]);
+  let filesToUpload = new FormData();
   const handleChange = (e) => {
     setFiles([...files, e.target.files[0]]);
   };
 
   const handleFileUpload = () => {
-    console.log(files);
-    axios({
-      method: "post",
-      url: "http://localhost:8080/upload",
-      data: files,
-      headers: { "Content-Type": "multipart/form-data" },
-    })
+    filesToUpload.append("file", files[0]);
+    console.log(filesToUpload[0]);
+    axios
+      .post("http://172.16.5.159:8080/xsd/upload", filesToUpload)
       .then((response) => {
         console.log(response);
       })
