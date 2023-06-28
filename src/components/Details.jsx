@@ -5,25 +5,28 @@ export default function Details(item) {
   const data = useContext(GlobalContext);
 
   return (
-    <div className=" mx-20 flex-col overflow-scroll-y scroll-smooth h-full">
+    <div className=" flex flex-col h-full pb-4 flex-grow overflow-y-auto scroll-smooth rounded-3xl bg-white mx-6 min-w-full items-center">
       <h3 className="m-4 font-semibold text-black-900 dark:text-black text-center">
         Contents
       </h3>
-      {Object.values(data[item.item]).map((item, index) => {
-        return (
-          <div
-            key={index}
-            className="flex flex-row p-4 bg-gray-100 border-2 mx-auto border-red m-4 ml-32 max-w-sm overflow-x-auto ustify-between shadow-3xl rounded-2xl text-center"
-          >
+
+      {data[item.item] &&
+        Object.values(data[item.item]).map((item, index) => {
+          return (
             <div
-              c
-              className="font-medium leading-none mx-4 text-black-100 items-center"
+              key={index}
+              className="flex flex-row p-4 bg-gray-100 border-2 border-red mx-32 my-2 max-w-sm  shadow-3xl rounded-2xl"
             >
-              {item}
+              <div
+                c
+                className="font-medium leading-none mx-4 text-black-100 text-center"
+              >
+                {item}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      {}
     </div>
   );
 }

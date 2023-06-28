@@ -3,7 +3,7 @@ import React from "react";
 export default function Instructions() {
   return (
     <div className="flex flex-col flex-grow h-full m-4 border-box ">
-      <ul className="list-disc flex flex-col items-center text-justify p-8 rounded-2xl w-full bg-white ">
+      <div className="flex flex-col p-8 rounded-2xl w-full bg-white items-center ">
         <h1 className="text-2xl font-semibold  p-2">About</h1>
         <p className="max-w-6xl text-justify">
           Introducing the Property Viewer, a versatile project that offers an
@@ -34,20 +34,53 @@ export default function Instructions() {
           intricacies of XSD files, the Property Viewer provides an invaluable
           resource for efficient and effective schema analysis.
         </p>
-        <h1 className="text-2xl font-semibold  p-2">Instructions</h1>
-        <li>
-          To view the content of the file click on the view button of that item
-          and the content will be displayed on your right.
-        </li>
-        <li>
-          To remove any item or items from the list, you need to select the
-          respective item, and then click on submit.
-        </li>
-        <li>
-          You get a chance to confirm before permanently removing the items from
-          the list. Hence, please make sure you do it correctly.
-        </li>
-      </ul>
+        <p className="max-w-6xl text-justify">
+          This innovative tool offers two distinct options for converting files,
+          catering to different user preferences and requirements. <br />{" "}
+          <b>Option 1: Automated Conversion</b> <br /> In the first option, the
+          Automated RAML Converter streamlines the conversion process by
+          automatically converting .ear or .xsd files to RAML format. Users can
+          simply upload their files, and the tool will handle the conversion
+          behind the scenes. This seamless and efficient approach eliminates the
+          need for manual intervention, saving users valuable time and effort.{" "}
+          <br />
+          <b>Option 2: Manual Modification</b> <br /> For users who require
+          greater control and flexibility over the conversion process, the
+          Customizable RAML Converter offers a tailored solution. In this
+          option, users have the ability to modify their file selections before
+          submitting them for conversion. The project provides an intuitive
+          interface where users can review the uploaded .ear or .xsd files, make
+          desired adjustments or exclusions, and then proceed with the
+          conversion to RAML. This option empowers users to fine-tune the
+          conversion based on their specific needs, ensuring optimal results.{" "}
+          <br /> Both options of the RAML Converter utilize sophisticated
+          algorithms and parsing techniques to accurately interpret the contents
+          of .ear or .xsd files and generate corresponding RAML representations.
+          The converted RAML files retain the essential structural and semantic
+          elements, enabling users to seamlessly transition their applications
+          or APIs to RAML-based architectures. <br /> With the Automated and
+          Customizable RAML Converter, users can leverage the power of RAML for
+          efficient API modeling, documentation, and integration. This project
+          simplifies the conversion process, eliminating manual efforts and
+          enabling users to embrace RAML's advantages in a streamlined and
+          user-friendly manner. <br />
+          <b>Instruction to manually intervene the modification process:</b>
+          <ul className="list-disc mx-6 mt-3 mb-6 flex flex-col">
+            <li>
+              To view the content of the file click on the view button of that
+              item and the content will be displayed on your right.
+            </li>
+            <li>
+              To remove any item or items from the list, you need to select the
+              respective item, and then click on submit.
+            </li>
+            <li>
+              You get a chance to confirm before permanently removing the items
+              from the list. Hence, please make sure you do it correctly.
+            </li>
+          </ul>
+        </p>
+      </div>
     </div>
   );
 }

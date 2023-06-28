@@ -41,14 +41,17 @@ export default function Explorer() {
   }
 
   return (
-    <div className="flex flex-col bg-white m-4 w-full overflow-y-auto scroll-smooth p-4 rounded-3xl">
-      <div className="flex flex-row justify-around">
-        <div className="flex-1">
+    <div className="flex flex-row m-6 p-4 w-full">
+      <div className="flex flex-col h-full w-full overflow-y-auto scroll-smooth rounded-3xl bg-white items-center">
+        <div>
+          <h3 className="m-4 font-semibold text-black-900 dark:text-black">
+            Items
+          </h3>
           {Object.keys(itemsList).map((item, index) => {
             return (
               <div
                 key={index}
-                className="flex flex-row p-4 bg-gray-200 border-2 mx-auto border-red m-4 ml-32 max-w-sm justify-between shadow-3xl rounded-2xl items-center"
+                className="flex flex-row p-4 bg-gray-200 border-2  border-red mx-32 my-4 max-w-xs justify-between shadow-3xl rounded-2xl items-center"
               >
                 <input
                   type="checkbox"
@@ -87,32 +90,36 @@ export default function Explorer() {
               </div>
             );
           })}
+          <div
+            className="max-w-md mx-auto my-8 flex justify-center"
+            onClick={() => {
+              if (
+                window.confirm(
+                  `The selected items will be removed. Please click on "OK" to confirm.`
+                )
+              ) {
+                removeItem();
+                window.alert("The items have been removed.");
+                console.log(itemsList);
+              } else {
+                window.alert("The items have not been removed.");
+              }
+            }}
+          >
+            <a
+              target="_blank"
+              className="group font-medium tracking-wide select-none text-base relative inline-flex items-center justify-center cursor-pointer h-12 border-2 border-solid py-0 px-6 rounded-md overflow-hidden z-10 transition-all duration-300 ease-in-out outline-0 bg-blue-500 text-white border-blue-500 hover:text-blue-500 focus:text-blue-500"
+            >
+              <strong className="font-medium">Submit</strong>
+              <span className="absolute bg-white bottom-0 w-0 left-1/2 h-full -translate-x-1/2 transition-all ease-in-out duration-300 group-hover:w-[105%] -z-[1] group-focus:w-[105%]"></span>
+            </a>
+          </div>
         </div>
-        <div>{viewDetails && <Details item={showDetails} />}</div>
       </div>
-      <div
-        className="max-w-md mx-auto space-y-6 m-6 flex justify-center"
-        onClick={() => {
-          if (
-            window.confirm(
-              `The selected items will be removed. Please click on "OK" to confirm.`
-            )
-          ) {
-            removeItem();
-            window.alert("The items have been removed.");
-          } else {
-            window.alert("The items have not been removed.");
-          }
-        }}
-      >
-        <a
-          target="_blank"
-          className="group font-medium tracking-wide select-none text-base relative inline-flex items-center justify-center cursor-pointer h-12 border-2 border-solid py-0 px-6 rounded-md overflow-hidden z-10 transition-all duration-300 ease-in-out outline-0 bg-blue-500 text-white border-blue-500 hover:text-blue-500 focus:text-blue-500"
-        >
-          <strong className="font-medium">Submit</strong>
-          <span className="absolute bg-white bottom-0 w-0 left-1/2 h-full -translate-x-1/2 transition-all ease-in-out duration-300 group-hover:w-[105%] -z-[1] group-focus:w-[105%]"></span>
-        </a>
+      <div className="flex w-full">
+        {<Details item={showDetails} view={viewDetails} />}
       </div>
+
       {/* {open && <ConfirmationModal open={open} setOpen={setOpen} />} */}
     </div>
   );

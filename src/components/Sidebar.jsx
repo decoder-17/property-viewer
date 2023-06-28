@@ -9,14 +9,14 @@ export default function Sidebar() {
   const splitLocation = pathname.split("/");
 
   const activeStyle =
-    "text-xl font-semibold py-2 px-4 bg-blue-500 rounded-full align-middle my-2 text-white";
-  const inactiveStyle = "text-xl font-semibold p-2 my-2 align-middle ";
+    "text-lg font-semibold py-2 px-4 bg-blue-500 rounded-full align-middle my-2 text-white";
+  const inactiveStyle = "text-lg font-semibold p-2 my-2 align-middle ";
 
   return (
-    <div className="logos flex flex-col justify-between items-center bg-white rounded-3xl m-4 max-w-sm">
+    <div className="logos flex flex-col justify-between items-center bg-white rounded-3xl my-10 ml-4 max-w-sm">
       <div className="t2mlogo flex flex-col ">
         <img src={caeliust2m} alt="caeliust2m" className=" h-48 rounded-full" />
-        <h1 className="text-2xl font-semibold p-4">Property Viewer</h1>
+        <h1 className="text-xl font-semibold p-4">Property Viewer</h1>
       </div>
       <div className="header flex flex-col">
         <ul>
@@ -28,7 +28,7 @@ export default function Sidebar() {
               splitLocation[1] === "instructions" ? activeStyle : inactiveStyle
             }
           >
-            <Link to="/instructions">About</Link>
+            <Link to="/instructions">Instructions</Link>
           </li>
         </ul>
       </div>
