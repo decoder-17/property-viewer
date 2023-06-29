@@ -5,14 +5,10 @@ import { FilesListContext } from "../App";
 
 export default function Explorer() {
   const { itemsList, setItemsList } = useContext(FilesListContext);
-  // console.log(itemsList);
-  // const [itemsList, setItemsList] = useState(data);
   const [viewDetails, setViewDetails] = useState(false);
   const [showDetails, setShowDetails] = useState();
   const [checkedItems, setCheckedItems] = useState({});
   const [itemsToRemove, setItemsToRemove] = useState([]);
-
-  // console.log(data);
 
   function removeItem() {
     for (let i = 0; i < itemsToRemove.length; i++) {
@@ -23,7 +19,7 @@ export default function Explorer() {
   }
 
   useEffect(() => {
-    setItemsList({ itemsList });
+    setItemsList(itemsList);
   }, {});
 
   function handleCheckboxChange(item) {
@@ -48,30 +44,30 @@ export default function Explorer() {
           <h3 className="m-4 font-semibold text-black-900 dark:text-black">
             Items
           </h3>
-          {Object.keys(itemsList).map((item, index) => {
+          {itemsList.map((item, index) => {
             return (
               <div
                 key={index}
-                className="flex flex-row p-4 bg-gray-200 border-2  border-red mx-32 my-4 max-w-xs justify-between shadow-3xl rounded-2xl items-center"
+                className="flex flex-row p-4 bg-gray-200 border-2  border-red mx-32 my-4 min-w-fit max-w-lg justify-between shadow-3xl rounded-2xl items-center"
               >
                 <input
                   type="checkbox"
-                  id={item}
+                  id={Object.keys(item)}
                   value=""
-                  onChange={() => handleCheckboxChange(item)}
-                  checked={checkedItems[item]}
+                  onChange={() => handleCheckboxChange(Object.keys(item))}
+                  checked={checkedItems[Object.keys(item)]}
                   className="appearance-none h-6 w-6 p-4 mx-4 bg-gray-400 rounded-full 
             checked:bg-blue-600 checked:scale-75
             transition-all duration-200 peer"
                 />
                 <div className="font-medium leading-none mx-4 text-black-100 items-center">
-                  {item}
+                  {Object.keys(item)}
                 </div>
 
                 <button
                   className={
                     viewDetails
-                      ? showDetails === item
+                      ? showDetails === Object.keys(item)
                         ? "text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         : "text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                       : "text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -83,7 +79,7 @@ export default function Explorer() {
                   }}
                 >
                   {viewDetails
-                    ? showDetails === item
+                    ? showDetails === Object.keys(item)
                       ? "Hide"
                       : "View"
                     : "View"}
