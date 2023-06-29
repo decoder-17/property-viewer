@@ -97,7 +97,7 @@ export default function Explorer() {
               ) {
                 removeItem();
                 window.alert("The items have been removed.");
-                console.log(itemsList);
+                // console.log(itemsList);
               } else {
                 window.alert("The items have not been removed.");
               }

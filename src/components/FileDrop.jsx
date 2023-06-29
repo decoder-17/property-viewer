@@ -116,7 +116,7 @@ export default function FileDrop() {
                     fill="currentFill"
                   />
                 </svg>
-                <strong className="font-medium">Submit</strong>
+                <strong className="font-medium">Submitting</strong>
               </div>
             ) : (
               <strong className="font-medium">Submit</strong>
